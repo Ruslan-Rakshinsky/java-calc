@@ -7,7 +7,9 @@ import javax.naming.directory.InvalidAttributeValueException;
 public class App {
     public static void main(String[] args) throws Exception {
         try {
-            System.out.println(calc(getInput()));
+            // System.out.println(calc(getInput()));
+            for (;;)
+                System.out.println(toRoman(getInput()));
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -70,7 +72,8 @@ public class App {
     public static String toRoman(String input) throws Exception {
         // Creating an enum so it will be easier to handle toRoman convertion
         enum RomanNumeral {
-            I(1), V(5), X(10), L(50), C(100);
+            I(1), IV(4), V(5), IX(9), X(10),
+            XL(40), L(50), XC(90), C(100);
 
             int weight;
 
@@ -91,6 +94,9 @@ public class App {
         for (int i = values.length - 1; i >= 0; i--) {
             while (value >= values[i].weight) {
                 buf.append(values[i]);
+                System.out.println(values[i]);
+                System.out.println(values[i].weight);
+                System.out.println(value);
                 value -= values[i].weight;
             }
         }
