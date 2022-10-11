@@ -124,8 +124,8 @@ public class Main {
         // to show the result in Roman notation later
         if (isFirstRoman == isSecondRoman) {
             // Check if numbers are less than 10
-            if (first > 10 || second > 10)
-                throw new Exception("Numbers are bigger than 10!");
+            if (first > 10 || second > 10 || first < 1 || second < 1)
+                throw new Exception("Numbers are bigger than 10 or less than 1!");
 
             String result;
 
