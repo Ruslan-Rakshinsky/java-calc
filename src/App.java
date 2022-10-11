@@ -14,6 +14,7 @@ public class App {
     } // public static void main(String[] args)
 
     public static String getInput() throws IOException {
+        System.out.print("Enter your expression: ");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String input = reader.readLine();
         return input;
@@ -114,8 +115,6 @@ public class App {
         // Check if both numbers are in the same notation
         boolean isFirstRoman = !Pattern.matches(".*\\d+.*", left);
         boolean isSecondRoman = !Pattern.matches(".*\\d+.*", right);
-        System.out.println(isFirstRoman);
-        System.out.println(isSecondRoman);
         // We need to keep these booleans to determine if we need
         // to show the result in Roman notation later
         if (isFirstRoman == isSecondRoman) {
