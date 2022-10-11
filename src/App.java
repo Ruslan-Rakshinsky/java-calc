@@ -7,9 +7,7 @@ import javax.naming.directory.InvalidAttributeValueException;
 public class App {
     public static void main(String[] args) throws Exception {
         try {
-            // System.out.println(calc(getInput()));
-            for (;;)
-                System.out.println(toRoman(getInput()));
+            System.out.println(calc(getInput()));
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -94,9 +92,6 @@ public class App {
         for (int i = values.length - 1; i >= 0; i--) {
             while (value >= values[i].weight) {
                 buf.append(values[i]);
-                System.out.println(values[i]);
-                System.out.println(values[i].weight);
-                System.out.println(value);
                 value -= values[i].weight;
             }
         }
