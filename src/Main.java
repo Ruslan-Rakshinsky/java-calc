@@ -60,9 +60,13 @@ public class Main {
         } // parsedValue(String left, String operator, String right)
     } // class parsedValue
 
-    public static parsedValue parseInput(String input) {
+    public static parsedValue parseInput(String input) throws Exception {
         String[] arrStr = input.split(" ");
         // We will get an exception if user entered invalid input
+        if (arrStr.length > 3) {
+            throw new Exception("Invalid input! Expected two numbers and an operator!");
+        }
+
         parsedValue result = new parsedValue(arrStr[0], arrStr[1], arrStr[2]);
         return result;
     } // public static String parseInput(String input)
