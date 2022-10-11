@@ -152,8 +152,8 @@ public class Main {
                 return toRoman(result);
             else
                 return result;
-        } else { // if (Pattern.matches("operator", left) && Pattern.matches("operator", right))
+        } else {
             throw new Exception("Operands have different notations!");
-        }
+        } // if (isFirstRoman == isSecondRoman)
     } // public static String calc(String input)
 } // App
