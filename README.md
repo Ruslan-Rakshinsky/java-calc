@@ -2,7 +2,7 @@
 I've been working hard to complete the first task on my first programming courses
 
 ## How does this program work?
-You simply enter your expression using Arabic or Roman numerals in the from
+You simply enter your expression using Arabic or Roman numerals in the form:
 > Number Operator Number
 
 For example:
