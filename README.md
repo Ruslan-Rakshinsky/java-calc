@@ -12,3 +12,10 @@ For example:
 Another example:
 > Input: X / II
 > Output: V
+
+Or even:
+> Input: IX * IX
+> Output: LXXXI
+
+### Editor and OS
+If you're interested, I use Visual Studio Code with Java Extension pack on Fedora Linux and Java-17-openjdk
