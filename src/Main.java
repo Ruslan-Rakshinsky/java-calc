@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.regex.Pattern;
 import javax.naming.directory.InvalidAttributeValueException;
 
-public class App {
+public class Main {
     public static void main(String[] args) throws Exception {
         try {
             System.out.println(calc(getInput()));
@@ -48,7 +48,7 @@ public class App {
     } // String toInt (String input)
 
     // Creating a structure to handle the input
-    public static class parsedValue {
+    static class parsedValue {
         public String left;
         public String operator;
         public String right;
