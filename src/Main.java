@@ -114,8 +114,8 @@ public class Main {
         String operator = value.operator;
 
         // Read the input numbers and convert from roman notation if needed
-        int first = Integer.parseInt(toInt(left));
-        int second = Integer.parseInt(toInt(right));
+        int first = Integer.parseInt(toInt(left.toUpperCase()));
+        int second = Integer.parseInt(toInt(right.toUpperCase()));
 
         // Check if both numbers are in the same notation
         boolean isFirstRoman = !Pattern.matches(".*\\d+.*", left);
