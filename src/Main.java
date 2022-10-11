@@ -89,7 +89,7 @@ public class Main {
         int value = Integer.parseInt(input);
         // Check if value is negative
         if (value <= 0)
-            throw new Exception("Roman could not be negative!");
+            throw new Exception("Roman could not be negative or null!");
 
         StringBuilder buf = new StringBuilder();
 
