@@ -62,6 +62,7 @@ public class Main {
 
     public static parsedValue parseInput(String input) throws Exception {
         String[] arrStr = input.split(" ");
+
         // We will get an exception if user entered invalid input
         if (arrStr.length > 3) {
             throw new Exception("Invalid input! Expected two numbers and an operator!");
