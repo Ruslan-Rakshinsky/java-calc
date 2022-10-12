@@ -2,10 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.regex.Pattern;
-import javax.naming.directory.InvalidAttributeValueException;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         try {
             System.out.println(calc(getInput()));
         } catch (Exception e) {
@@ -16,27 +15,20 @@ public class Main {
     public static String getInput() throws IOException {
         System.out.print("Enter your expression: ");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String input = reader.readLine();
-        return input;
+        return reader.readLine();
     } // public static String getInput()
 
-    public static String toInt(String input) throws InvalidAttributeValueException {
+    public static String toInt(String input) {
         if (!Pattern.matches(".*\\d+.*", input)) {
             int total = 0, current = 0, previous = 0;
 
             for (int i = input.length() - 1; i >= 0; i--) {
                 switch (input.charAt(i)) {
-                    case 'I':
-                        current = 1;
-                        break;
-                    case 'V':
-                        current = 5;
-                        break;
-                    case 'X':
-                        current = 10;
-                        break;
-                    default:
-                        break;
+                    case 'I' -> current = 1;
+                    case 'V' -> current = 5;
+                    case 'X' -> current = 10;
+                    default -> {
+                    }
                 }
 
                 total += (current < previous) ? -1 * current : current;
@@ -68,23 +60,19 @@ public class Main {
             throw new Exception("Invalid input! Expected two numbers and an operator!");
         }
 
-        parsedValue result = new parsedValue(arrStr[0], arrStr[1], arrStr[2]);
-        return result;
+        return new parsedValue(arrStr[0], arrStr[1], arrStr[2]);
     } // public static String parseInput(String input)
 
-    // Convert the input to Roman notation
     public static String toRoman(String input) throws Exception {
-        // Creating an enum so it will be easier to handle toRoman convertion
         enum RomanNumeral {
             I(1), IV(4), V(5), IX(9), X(10),
             XL(40), L(50), XC(90), C(100);
-
-            int weight;
+            final int weight;
 
             RomanNumeral(int weight) {
                 this.weight = weight;
             }
-        }
+        } // enum RomanNumeral
 
         int value = Integer.parseInt(input);
         // Check if value is negative
@@ -102,8 +90,7 @@ public class Main {
             }
         }
         return buf.toString();
-
-    } // toRoman
+    } // public static String toRoman(String input)
 
     public static String calc(String input) throws Exception {
         parsedValue value = parseInput(input);
@@ -127,31 +114,17 @@ public class Main {
             if (first > 10 || second > 10 || first < 1 || second < 1)
                 throw new Exception("Numbers are bigger than 10 or less than 1!");
 
-            String result;
-
             // Switch statement to handle every operation
-            switch (operator.charAt(0)) {
-                case '+':
-                    result = String.valueOf(first + second);
-                    break;
-                case '-':
-                    result = String.valueOf(first - second);
-                    break;
-                case '*':
-                    result = String.valueOf(first * second);
-                    break;
-                case '/':
-                    result = String.valueOf(first / second);
-                    break;
-                default:
-                    throw new Exception("Invalid operator given!");
-            } // switch (operator.charAt(0))
+            String result = switch (operator.charAt(0)) {
+                case '+' -> String.valueOf(first + second);
+                case '-' -> String.valueOf(first - second);
+                case '*' -> String.valueOf(first * second);
+                case '/' -> String.valueOf(first / second);
+                default -> throw new Exception("Invalid operator given!");
+            }; // switch (operator.charAt(0))
 
             // Determine in which notation we should handle to result
-            if (isFirstRoman && isSecondRoman)
-                return toRoman(result);
-            else
-                return result;
+            return (isFirstRoman) ? toRoman(result) : result;
         } else {
             throw new Exception("Operands have different notations!");
         } // if (isFirstRoman == isSecondRoman)
