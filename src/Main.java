@@ -96,4 +96,4 @@ public class Main {
             throw new Exception("Operands have different notations!");
         } // if (isFirstRoman == isSecondRoman)
     } // public static String calc(String input)
-} // App
+} // Main
