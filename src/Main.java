@@ -60,7 +60,6 @@ public class Main {
         return buf.toString();
     } // public static String toRoman(String input)
 
-
     record parsedValue(String left, String operator, String right){}
 
     public static parsedValue parseInput(String input) throws Exception {
@@ -70,7 +69,6 @@ public class Main {
 
         return new parsedValue(arrStr[0], arrStr[1], arrStr[2]);
     } // public static String parseInput(String input)
-
 
     public static String calc(String input) throws Exception {
         parsedValue value = parseInput(input);
