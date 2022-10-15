@@ -1,15 +1,9 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.regex.Pattern;
 
 public class Main {
-    public static void main(String[] args) {
-        try {
-            System.out.println(calc(getInput()));
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+    public static void main(String[] args) throws Exception {
+        System.out.println(calc(getInput()));
     } // public static void main(String[] args)
 
     public static String getInput() throws IOException {
@@ -18,7 +12,7 @@ public class Main {
         return reader.readLine();
     } // public static String getInput()
 
-    public static String toInt(String input) {
+    public static String romanToDecimal (String input) {
         if (!Pattern.matches(".*\\d+.*", input)) {
             int total = 0, current = 0, previous = 0;
 
@@ -27,30 +21,18 @@ public class Main {
                     case 'I' -> current = 1;
                     case 'V' -> current = 5;
                     case 'X' -> current = 10;
-                    default -> {
-                    }
-                }
+                    default -> {}
+                } // switch (input.charAt(i))
 
                 total += (current < previous) ? -1 * current : current;
                 previous = current;
-            }
+            } // for (int i = input.length() - 1; i >= 0; i--)
             return String.valueOf(total);
-        }
+        } // if (!Pattern.matches(".*\\d+.*", input))
         return input;
     } // String toInt (String input)
 
-    // Creating a structure to handle the input
-    static class parsedValue {
-        public String left;
-        public String operator;
-        public String right;
-
-        parsedValue(String left, String operator, String right) {
-            this.left = left;
-            this.operator = operator;
-            this.right = right;
-        } // parsedValue(String left, String operator, String right)
-    } // class parsedValue
+    record parsedValue(String left, String operator, String right){}
 
     public static parsedValue parseInput(String input) throws Exception {
         String[] arrStr = input.split(" ");
@@ -95,27 +77,21 @@ public class Main {
     public static String calc(String input) throws Exception {
         parsedValue value = parseInput(input);
 
-        // Assign structure members to local variables
-        String left = value.left;
-        String right = value.right;
-        String operator = value.operator;
-
-        // Read the input numbers and convert from roman notation if needed
-        int first = Integer.parseInt(toInt(left.toUpperCase()));
-        int second = Integer.parseInt(toInt(right.toUpperCase()));
+        int first = Integer.parseInt(romanToDecimal(value.left.toUpperCase()));
+        int second = Integer.parseInt(romanToDecimal(value.right.toUpperCase()));
 
         // Check if both numbers are in the same notation
-        boolean isFirstRoman = !Pattern.matches(".*\\d+.*", left);
-        boolean isSecondRoman = !Pattern.matches(".*\\d+.*", right);
+        boolean isFirstRoman = !Pattern.matches(".*\\d+.*", value.left);
+        boolean isSecondRoman = !Pattern.matches(".*\\d+.*", value.right);
         // We need to keep these booleans to determine if we need
         // to show the result in Roman notation later
         if (isFirstRoman == isSecondRoman) {
             // Check if numbers are less than 10
-            if (first > 10 || second > 10 || first < 1 || second < 1)
+            if (first > 10 || first < 1 || second > 10 || second < 1)
                 throw new Exception("Numbers are bigger than 10 or less than 1!");
 
             // Switch statement to handle every operation
-            String result = switch (operator.charAt(0)) {
+            String result = switch (value.operator.charAt(0)) {
                 case '+' -> String.valueOf(first + second);
                 case '-' -> String.valueOf(first - second);
                 case '*' -> String.valueOf(first * second);
