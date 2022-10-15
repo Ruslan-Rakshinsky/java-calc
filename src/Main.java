@@ -30,7 +30,7 @@ public class Main {
             return String.valueOf(total);
         } // if (!Pattern.matches(".*\\d+.*", input))
         return input;
-    } // String toInt (String input)
+    } // String romanToDecimal (String input)
 
     record parsedValue(String left, String operator, String right){}
 
@@ -89,9 +89,9 @@ public class Main {
                 case '*' -> String.valueOf(first * second);
                 case '/' -> String.valueOf(first / second);
                 default -> throw new Exception("Invalid operator given!");
-            }; // switch (operator.charAt(0))
+            }; // String result = switch (value.operator.charAt(0))
 
-            return (isFirstRoman) ? toRoman(result) : result;
+            return isFirstRoman ? toRoman(result) : result;
         } else {
             throw new Exception("Operands have different notations!");
         } // if (isFirstRoman == isSecondRoman)
