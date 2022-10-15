@@ -36,11 +36,8 @@ public class Main {
 
     public static parsedValue parseInput(String input) throws Exception {
         String[] arrStr = input.split(" ");
-
-        // We will get an exception if user entered invalid input
-        if (arrStr.length > 3) {
+        if (arrStr.length > 3)
             throw new Exception("Invalid input! Expected two numbers and an operator!");
-        }
 
         return new parsedValue(arrStr[0], arrStr[1], arrStr[2]);
     } // public static String parseInput(String input)
@@ -57,7 +54,6 @@ public class Main {
         } // enum RomanNumeral
 
         int value = Integer.parseInt(input);
-        // Check if value is negative
         if (value <= 0)
             throw new Exception("Roman could not be negative or null!");
 
@@ -80,17 +76,13 @@ public class Main {
         int first = Integer.parseInt(romanToDecimal(value.left.toUpperCase()));
         int second = Integer.parseInt(romanToDecimal(value.right.toUpperCase()));
 
-        // Check if both numbers are in the same notation
         boolean isFirstRoman = !Pattern.matches(".*\\d+.*", value.left);
         boolean isSecondRoman = !Pattern.matches(".*\\d+.*", value.right);
-        // We need to keep these booleans to determine if we need
-        // to show the result in Roman notation later
+
         if (isFirstRoman == isSecondRoman) {
-            // Check if numbers are less than 10
             if (first > 10 || first < 1 || second > 10 || second < 1)
                 throw new Exception("Numbers are bigger than 10 or less than 1!");
 
-            // Switch statement to handle every operation
             String result = switch (value.operator.charAt(0)) {
                 case '+' -> String.valueOf(first + second);
                 case '-' -> String.valueOf(first - second);
@@ -99,7 +91,6 @@ public class Main {
                 default -> throw new Exception("Invalid operator given!");
             }; // switch (operator.charAt(0))
 
-            // Determine in which notation we should handle to result
             return (isFirstRoman) ? toRoman(result) : result;
         } else {
             throw new Exception("Operands have different notations!");
