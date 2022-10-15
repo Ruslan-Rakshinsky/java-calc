@@ -32,17 +32,7 @@ public class Main {
         return input;
     } // String romanToDecimal (String input)
 
-    record parsedValue(String left, String operator, String right){}
-
-    public static parsedValue parseInput(String input) throws Exception {
-        String[] arrStr = input.split(" ");
-        if (arrStr.length > 3)
-            throw new Exception("Invalid input! Expected two numbers and an operator!");
-
-        return new parsedValue(arrStr[0], arrStr[1], arrStr[2]);
-    } // public static String parseInput(String input)
-
-    public static String toRoman(String input) throws Exception {
+    public static String decimalToRoman (String input) throws Exception {
         enum RomanNumeral {
             I(1), IV(4), V(5), IX(9), X(10),
             XL(40), L(50), XC(90), C(100);
@@ -70,6 +60,18 @@ public class Main {
         return buf.toString();
     } // public static String toRoman(String input)
 
+
+    record parsedValue(String left, String operator, String right){}
+
+    public static parsedValue parseInput(String input) throws Exception {
+        String[] arrStr = input.split(" ");
+        if (arrStr.length > 3)
+            throw new Exception("Invalid input! Expected two numbers and an operator!");
+
+        return new parsedValue(arrStr[0], arrStr[1], arrStr[2]);
+    } // public static String parseInput(String input)
+
+
     public static String calc(String input) throws Exception {
         parsedValue value = parseInput(input);
 
@@ -91,7 +93,7 @@ public class Main {
                 default -> throw new Exception("Invalid operator given!");
             }; // String result = switch (value.operator.charAt(0))
 
-            return isFirstRoman ? toRoman(result) : result;
+            return isFirstRoman ? decimalToRoman(result) : result;
         } else {
             throw new Exception("Operands have different notations!");
         } // if (isFirstRoman == isSecondRoman)
